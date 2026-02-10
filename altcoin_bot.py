@@ -85,5 +85,11 @@ def analyze_market():
     return header + body + footer
 
 if __name__ == "__main__":
+    print("Iniciando varredura de mercado...")
     report_content = analyze_market()
+    
+    # Log para inspeção no GitHub Actions
+    print(f"Conteúdo do relatório:\n{report_content}")
+    
+    # Garante o envio mesmo que a lista de moedas esteja vazia
     send_telegram(report_content)
