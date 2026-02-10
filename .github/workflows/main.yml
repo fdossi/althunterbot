@@ -2,11 +2,10 @@ name: Crypto Altcoin Hunter Daily
 
 on:
   schedule:
-  # Agendado para as 10:00 UTC e 15:00 UTC diariamente, o que corresponde a 07:00 AM e 12:00 PM no horário de Brasília, respectivamente.
     # 10:00 UTC = 07:00 AM Brasília
     # 15:00 UTC = 12:00 PM Brasília
     - cron: '0 10,15 * * *'
-  workflow_dispatch: # Permite que você rode o bot manualmente pelo botão "Run workflow" no GitHub
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -19,16 +18,17 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.11' # Atualizado para 3.11 para compatibilidade total
 
       - name: Instalar Dependências
         run: |
           python -m pip install --upgrade pip
-          pip install requests pandas pandas-ta
+          pip install requests pandas
+          # Instalação direta do repositório para evitar o erro "No matching distribution"
+          pip install git+https://github.com/twopirllc/pandas-ta.git@development
 
       - name: Rodar Altcoin Bot
         env:
-          # Conecta os Secrets que você cadastrou no GitHub ao código
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python altcoin_bot.py

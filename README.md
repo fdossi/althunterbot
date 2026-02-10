@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🚀 Crypto Altcoin Hunter Bot
 
 Um sistema automatizado em Python que realiza varredura diária no mercado de criptomoedas em busca de **altcoins com alto potencial de valorização** no curto prazo. O bot analisa dados técnicos, volume e métricas de mercado, enviando um relatório detalhado diretamente para o seu **Telegram**.
@@ -45,3 +46,7 @@ export TELEGRAM_CHAT_ID='seu_id_aqui'
 
 # Rodar o bot
 python altcoin_bot.py
+=======
+# althunterbot
+Daily Altcoin scout: Automated crypto reports for short-term opportunities delivered to your Telegram.
+>>>>>>> 36937988aae31a382cb3a5cbf633b3db2d064453
