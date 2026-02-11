@@ -85,11 +85,14 @@ def analyze_market():
     return header + body + footer
 
 if __name__ == "__main__":
-    print("Iniciando varredura de mercado...")
+    print("Iniciando varredura...")
     report_content = analyze_market()
     
-    # Log para inspeção no GitHub Actions
-    print(f"Conteúdo do relatório:\n{report_content}")
-    
-    # Garante o envio mesmo que a lista de moedas esteja vazia
-    send_telegram(report_content)
+    # Se o mercado estiver parado, enviamos um status de 'Vivo'
+    if "Nenhuma oportunidade" in report_content:
+        status_msg = "🤖 *AltHunterBot Status:* Operacional.\nO mercado não atingiu os critérios de entrada agora."
+        print("Enviando status de operacional...")
+        send_telegram(status_msg)
+    else:
+        print("Enviando relatório de oportunidades...")
+        send_telegram(report_content)
