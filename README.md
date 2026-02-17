@@ -1,52 +1,47 @@
-<<<<<<< HEAD
-# 🚀 Crypto Altcoin Hunter Bot
+# 🚀 AltHunterBot - Crypto Scanner
 
-Um sistema automatizado em Python que realiza varredura diária no mercado de criptomoedas em busca de **altcoins com alto potencial de valorização** no curto prazo. O bot analisa dados técnicos, volume e métricas de mercado, enviando um relatório detalhado diretamente para o seu **Telegram**.
+O **AltHunterBot** é um sistema automatizado em Python que realiza varreduras diárias no mercado de criptomoedas em busca de ativos com alto potencial de valorização no curto prazo. Ele prioriza as narrativas dominantes de 2026: **IA (Inteligência Artificial), RWA (Real World Assets) e DePIN (Infraestrutura Física Descentralizada)**.
 
-## 📊 Como o Bot Funciona
+O bot analisa dados técnicos, volume e liquidez em corretoras Tier 1, enviando relatórios detalhados diretamente para um grupo ou chat no **Telegram**.
 
-O script roda via **GitHub Actions** todos os dias e executa as seguintes etapas:
+## 📊 Funcionalidades Principais
 
-1.  **Filtro de Ativos:** Ignora stablecoins e foca nas 250 principais altcoins por volume.
-2.  **Análise Técnica:** Calcula o **RSI (Índice de Força Relativa)** para identificar ativos que não estão sobrecomprados.
-3.  **Métrica de Momentum:** Analisa a relação **Volume/Market Cap** para detectar interesse real de "baleias" e institucionais.
-4.  **Verificação de Liquidez:** Filtra moedas com volume saudável para evitar *low-caps* extremamente arriscadas.
-5.  **Relatório:** Seleciona as 10 melhores oportunidades e envia via Bot API do Telegram.
+O script utiliza **GitHub Actions** para automação serverless e executa as seguintes etapas:
+
+1.  **Alça de Segurança (Bitcoin Safety):** Antes de analisar qualquer altcoin, o bot verifica a variação do Bitcoin nas últimas 24h. Se a queda for superior a **5%**, o relatório é cancelado para proteger o usuário de sinais falsos em quedas sistêmicas.
+2.  **Filtro de Narrativas:** Prioriza moedas de setores estratégicos como IA, RWA e DePIN.
+3.  **Análise de Momentum:** Calcula o **RSI (14 períodos)** e a relação **Volume/Market Cap**. Valores de V/MCap acima de 0.07 sugerem forte interesse institucional.
+4.  **Alerta de Sobrevenda (🔥):** Ativos com **RSI < 35** são destacados com um ícone de fogo, indicando oportunidades de exaustão de venda.
+5.  **Aposta do Dia:** Identifica automaticamente o ativo da watchlist com o melhor setup técnico para reversão imediata.
+6.  **Contexto do Ativo:** Para cada oportunidade, o bot busca um resumo do projeto e as principais corretoras onde está listado.
+7.  **Notificação de Erros:** Caso ocorra uma falha técnica (API offline ou erro de script), um alerta é enviado automaticamente ao Telegram.
 
 ## 🛠️ Tecnologias Utilizadas
 
-* **Python 3.9+**
-* **Pandas & Pandas-TA:** Para processamento de dados e indicadores técnicos.
-* **CoinGecko API:** Fonte de dados de mercado em tempo real.
-* **GitHub Actions:** Automação e agendamento (Cron Job).
-* **Telegram Bot API:** Interface de saída para os relatórios.
+* **Python 3.11**
+* **Pandas & Pandas-TA:** Processamento de dados e indicadores técnicos.
+* **CoinGecko API:** Dados de mercado em tempo real.
+* **GitHub Actions:** Automação e agendamento (Cron Job) 2x ao dia (07h e 12h BRT).
+* **Telegram Bot API:** Notificações de relatórios e alertas de falha técnica.
 
 ## ⚙️ Configuração e Instalação
 
 ### 1. Requisitos
-Crie um bot no Telegram através do `@BotFather` e obtenha seu `TOKEN` e seu `CHAT_ID`.
+* Crie um bot no Telegram via `@BotFather` para obter seu `TELEGRAM_TOKEN`.
+* Obtenha seu `TELEGRAM_CHAT_ID` (pessoal ou de grupo). IDs de grupo devem começar com `-100`.
 
-### 2. Configuração do Repositório
-Para que o bot funcione automaticamente, adicione as seguintes chaves em **Settings > Secrets and variables > Actions > New repository secret**:
+### 2. Configuração do Repositório (GitHub Secrets)
+Adicione as chaves em **Settings > Secrets and variables > Actions > New repository secret**:
 
 | Secret | Descrição |
 | :--- | :--- |
-| `TELEGRAM_TOKEN` | O token de API fornecido pelo BotFather. |
-| `TELEGRAM_CHAT_ID` | O ID numérico da sua conversa com o bot. |
+| `TELEGRAM_TOKEN` | Token de API fornecido pelo BotFather. |
+| `TELEGRAM_CHAT_ID` | ID numérico da conversa ou grupo (ex: -100...). |
 
 ### 3. Execução Local
-Se desejar rodar o script manualmente em sua máquina:
 ```bash
 # Instalar dependências
-pip install -r requirements.txt
-
-# Configurar variáveis de ambiente (ou editar temporariamente no código)
-export TELEGRAM_TOKEN='seu_token_aqui'
-export TELEGRAM_CHAT_ID='seu_id_aqui'
+pip install requests pandas pandas-ta
 
 # Rodar o bot
 python altcoin_bot.py
-=======
-# althunterbot
-Daily Altcoin scout: Automated crypto reports for short-term opportunities delivered to your Telegram.
->>>>>>> 36937988aae31a382cb3a5cbf633b3db2d064453

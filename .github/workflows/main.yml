@@ -2,9 +2,7 @@ name: Crypto Altcoin Hunter Daily
 
 on:
   schedule:
-    # 10:00 UTC = 07:00 AM Brasília
-    # 15:00 UTC = 12:00 PM Brasília
-    - cron: '0 10,15 * * *'
+    - cron: '0 10,15 * * *' # 07h e 12h Brasília
   workflow_dispatch: 
 
 jobs:
@@ -18,15 +16,26 @@ jobs:
       - name: Configurar Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12' # Atualizado para 3.12 para compatibilidade com pandas-ta
+          python-version: '3.11'
 
       - name: Instalar Dependências
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install requests pandas pandas-ta
 
       - name: Rodar Altcoin Bot
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python altcoin_bot.py
+
+      - name: Notificar Falha no Telegram
+        if: failure()
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \
+          -d chat_id=${TELEGRAM_CHAT_ID} \
+          -d text="❌ *ERRO NO ALTHUNTERBOT*: A execução falhou. Logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+          -d parse_mode="Markdown"
