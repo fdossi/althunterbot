@@ -19,7 +19,7 @@ O script utiliza **GitHub Actions** para automação serverless e executa as seg
 ## 🛠️ Tecnologias Utilizadas
 
 * **Python 3.11**
-* **Pandas & Pandas-TA:** Processamento de dados e indicadores técnicos.
+* **Pandas & Pandas-TA-Classic:** Processamento de dados e indicadores técnicos.
 * **CoinGecko API:** Dados de mercado em tempo real.
 * **GitHub Actions:** Automação e agendamento (Cron Job) 2x ao dia (07h e 12h BRT).
 * **Telegram Bot API:** Notificações de relatórios e alertas de falha técnica.
@@ -41,7 +41,7 @@ Adicione as chaves em **Settings > Secrets and variables > Actions > New reposit
 ### 3. Execução Local
 ```bash
 # Instalar dependências
-pip install requests pandas pandas-ta
+pip install -r requirements.txt
 
 # Rodar o bot
 python altcoin_bot.py
